@@ -1,0 +1,10 @@
+FROM balenalib/%%RESIN_MACHINE_NAME%%-debian
+
+RUN apt-get update && apt-get install -y curl wget build-essential libelf-dev awscli bc flex libssl-dev python pkg-config git libnl-3-dev libnl-genl-3-dev
+COPY . /usr/src/app
+WORKDIR /usr/src/app
+
+ENV VERSION '2.27.0+rev1.prod'
+RUN ./build.sh
+
+CMD ./run.sh
